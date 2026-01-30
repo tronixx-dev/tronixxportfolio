@@ -34,19 +34,16 @@ export default function Login() {
 
       const data = await response.json();
 
-      if (!response.ok) throw new Error(data.message || data.error || "Login failed");
+      if (!response.ok)
+        throw new Error(data.message || data.error || "Login failed");
 
-      toast.success("Login successful!");
-      console.log("Logged in user:", data.existingUser);
+      toast.success("Welcome back!");
 
-      // Store token for later use
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.existingUser));
 
-      // Redirect to dashboard or home
       navigate("/");
     } catch (error) {
-      console.error("Login error:", error.message);
       toast.error(error.message);
     } finally {
       setLoading(false);
@@ -54,46 +51,71 @@ export default function Login() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center">
-      <h1 className="text-3xl font-bold mb-8">Login</h1>
-
-      <form className="flex flex-col w-full max-w-md gap-4" onSubmit={handleSubmit}>
-        <label className="flex flex-col">
-          Email
-          <input
-            type="email"
-            name="email"
-            value={credentials.email}
-            onChange={handleChange}
-            placeholder="Enter your email"
-            className="border border-black p-2 rounded"
-            required
-          />
-        </label>
-
-        <label className="flex flex-col">
-          Password
-          <input
-            type="password"
-            name="password"
-            value={credentials.password}
-            onChange={handleChange}
-            placeholder="Enter your password"
-            className="border border-black p-2 rounded"
-            required
-          />
-        </label>
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="p-3 bg-blue-600 text-white rounded mt-4"
-        >
-          {loading ? "Loading..." : "Login"}
-        </button>
-      </form>
-
+    <section className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center px-6">
       <ToastContainer position="top-right" autoClose={3000} />
-    </div>
+
+      <div className="w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-white shadow-xl">
+
+        {/* Header */}
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl font-bold mb-2">
+            Welcome <span className="text-blue-500">Back</span>
+          </h1>
+          <p className="text-gray-400 text-sm">
+            Log in to continue
+          </p>
+        </div>
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-5">
+
+          <div>
+            <label className="block text-sm mb-1 text-gray-300">
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={credentials.email}
+              onChange={handleChange}
+              placeholder="you@email.com"
+              required
+              className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 outline-none focus:border-blue-500 transition"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1 text-gray-300">
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              value={credentials.password}
+              onChange={handleChange}
+              placeholder="••••••••"
+              required
+              className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 outline-none focus:border-blue-500 transition"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-500 transition font-semibold disabled:opacity-60"
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+
+        {/* Footer */}
+        <p className="text-center text-sm text-gray-400 mt-6">
+          Don’t have an account?{" "}
+          <a href="/signup" className="text-blue-400 hover:underline">
+            Sign up
+          </a>
+        </p>
+      </div>
+    </section>
   );
 }

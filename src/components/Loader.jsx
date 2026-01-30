@@ -1,23 +1,13 @@
+import { Html } from "@react-three/drei"
 
+const Loader = () => {
+  return (
+    <Html>
+    <div className="flex justify-center items-center">
+      <div className="w-20 h-20 border-2 border-opacity-20 border-blue-500 rounded-full animate-spin"/>
+    </div>
+    </Html>
+  )
+}
 
-export default function Loader() {
-    return(
-        <div className="w-full min-h-screen flex flex-col items-center justify-center">
-<div className="loader-wrapper">
-  <span className="loader-letter">G</span>
-  <span className="loader-letter">e</span>
-  <span className="loader-letter">n</span>
-  <span className="loader-letter">e</span>
-  <span className="loader-letter">r</span>
-  <span className="loader-letter">a</span>
-  <span className="loader-letter">t</span>
-  <span className="loader-letter">i</span>
-  <span className="loader-letter">n</span>
-  <span className="loader-letter">g</span>
-
-  <div className="loader"></div>
-</div>
-        </div>
-
-    )
-};
+export default Loader

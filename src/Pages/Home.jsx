@@ -1,83 +1,39 @@
-import React, { useState, useEffect } from "react";
-import Counter from "../components/Counter"; 
-import { IoPersonAddSharp } from "react-icons/io5";
-import { Component } from "react";
-import { Link, useNavigate } from "react-router-dom";
+const Home = () => {
+  return (
+    <section className="relative w-full h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center">
 
-export default function Home() {
-  const year = new Date().getFullYear();
-  const[counter, setCounter] = useState (0)
-
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    //code goes here
-    console.log("rendered")
-  }, [])
-
-  const handleMinus = () => {
-    if(counter > 0) {
-      setCounter(counter - 1)
-    }
-  }
-
-  const programmaticNavigation = () => {
-    navigate('/about')
-    console.log("Gott navigated programmatically!")
-  }
-    return (
-      
-     
-    <main >
-      <h1 className="text-red-600 text-4xl font-bold">
-        Hello React
-      </h1>
-
-      <h3>
-        The year is {year}
-      </h3>
-
-      <Counter
-      name='Component'
-      />
-
-      <div>
-        <h1>
-          {counter}
+      {/* Overlay Content */}
+      <div className="z-10 text-center px-6 max-w-3xl">
+        <h1 className="text-white text-5xl md:text-7xl font-bold tracking-tight">
+          Hi, This is <span className="text-blue-500">Tronixxware</span>
         </h1>
 
+        <p className="mt-6 text-gray-300 text-lg md:text-xl leading-relaxed">
+          A passionate frontend developer crafting modern, scalable, and
+          beautiful web experiences with React.
+        </p>
 
-        <div
-        className="flex gap-[10px]"
-        >
-          <button
-          onClick={ () => setCounter(counter + 1)}
+        <div className="mt-10 flex flex-wrap justify-center gap-6">
+          <a
+            href="http://localhost:5173/projects"
+            className="px-8 py-3 rounded-xl bg-blue-500 text-white font-medium hover:bg-blue-600 transition"
           >
-            Add
-          </button>
+            View Projects
+          </a>
 
-
-          <button
-           onClick={handleMinus}
+          <a
+            href="http://localhost:5173/contact"
+            className="px-8 py-3 rounded-xl border border-white/30 text-white hover:bg-white/10 transition"
           >
-            Minus
-           
-          </button>
-          <IoPersonAddSharp />
-         
-
-          
+            Contact Me
+          </a>
         </div>
-        <Link to={'/about'}>
-        Go to about page
-        </Link>
-
-        <button
-        onClick={programmaticNavigation}
-        >
-            programmaticNavigation
-        </button>
       </div>
-    </main>
-  )
-}
+
+      {/* Subtle background effect */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.15),transparent_70%)]" />
+    </section>
+  );
+};
+
+export default Home;

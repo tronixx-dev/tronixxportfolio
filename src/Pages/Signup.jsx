@@ -26,7 +26,7 @@ export default function Signup() {
 
     try {
       const response = await fetch(
-        "https://my-project-xkha.vercel.app/post-user", // your preferred endpoint
+        "https://my-project-xkha.vercel.app/post-user",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -36,14 +36,12 @@ export default function Signup() {
 
       const data = await response.json();
 
-      if (!response.ok) throw new Error(data.message || data.error || "Signup failed");
+      if (!response.ok)
+        throw new Error(data.message || data.error || "Signup failed");
 
       toast.success("Signed up successfully!");
-      console.log("New user:", data.user);
-
-      navigate("/"); // Redirect after signup
+      navigate("/home");
     } catch (error) {
-      console.error("Signup error:", error.message);
       toast.error(error.message);
     } finally {
       setLoading(false);
@@ -51,71 +49,92 @@ export default function Signup() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center">
-      <h1 className="text-3xl font-bold mb-8">Signup</h1>
+    <section className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center px-6">
+      <div className="w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-white shadow-xl">
 
-      <form className="flex flex-col w-full max-w-md gap-4" onSubmit={handleSubmit}>
-        <label className="flex flex-col">
-          Username
-          <input
-            type="text"
-            name="username"
-            value={userData.username}
-            onChange={handleChange}
-            placeholder="Enter your username"
-            className="border border-black p-2 rounded"
-            required
-          />
-        </label>
+        {/* Header */}
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl font-bold mb-2">
+            Create an <span className="text-blue-500">Account</span>
+          </h1>
+          <p className="text-gray-400 text-sm">
+            Join and showcase your presence
+          </p>
+        </div>
 
-        <label className="flex flex-col">
-          Email
-          <input
-            type="email"
-            name="email"
-            value={userData.email}
-            onChange={handleChange}
-            placeholder="Enter your email"
-            className="border border-black p-2 rounded"
-            required
-          />
-        </label>
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-5">
 
-        <label className="flex flex-col">
-          Password
-          <input
-            type="password"
-            name="password"
-            value={userData.password}
-            onChange={handleChange}
-            placeholder="Enter your password"
-            className="border border-black p-2 rounded"
-            required
-          />
-        </label>
+          <div>
+            <label className="block text-sm mb-1 text-gray-300">
+              Username
+            </label>
+            <input
+              type="text"
+              name="username"
+              value={userData.username}
+              onChange={handleChange}
+              placeholder="yourusername"
+              required
+              className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 outline-none focus:border-blue-500 transition"
+            />
+          </div>
 
-        <label className="flex flex-col">
-          Bio
-          <textarea
-            name="bio"
-            value={userData.bio}
-            onChange={handleChange}
-            rows={5}
-            placeholder="Tell us about yourself"
-            className="border border-black p-2 rounded"
-          />
-        </label>
+          <div>
+            <label className="block text-sm mb-1 text-gray-300">
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={userData.email}
+              onChange={handleChange}
+              placeholder="you@email.com"
+              required
+              className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 outline-none focus:border-blue-500 transition"
+            />
+          </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="p-3 bg-green-600 text-white rounded mt-4"
-        >
-          {loading ? "Loading..." : "Submit"}
-        </button>
-      </form>
+          <div>
+            <label className="block text-sm mb-1 text-gray-300">
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              value={userData.password}
+              onChange={handleChange}
+              placeholder="••••••••"
+              required
+              className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 outline-none focus:border-blue-500 transition"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1 text-gray-300">
+              Bio <span className="text-gray-500">(optional)</span>
+            </label>
+            <textarea
+              name="bio"
+              value={userData.bio}
+              onChange={handleChange}
+              rows={4}
+              placeholder="Tell us a bit about yourself..."
+              className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 outline-none focus:border-blue-500 transition resize-none"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-500 transition font-semibold disabled:opacity-60"
+          >
+            {loading ? "Creating account..." : "Sign Up"}
+          </button>
+        </form>
+      </div>
 
       <ToastContainer position="top-right" autoClose={3000} />
-    </div>
+    </section>
   );
 }

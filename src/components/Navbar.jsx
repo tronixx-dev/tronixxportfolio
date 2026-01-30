@@ -1,59 +1,43 @@
+import { NavLink } from "react-router-dom";
 
-import { Link, useLocation } from "react-router-dom"
+const Navbar = () => {
+  return (
+    <header className="fixed top-0 left-0 w-full h-16 px-6 md:px-12 flex items-center justify-between 
+      bg-black/40 backdrop-blur-md border-b border-white/10 z-50">
 
-export default function Navbar() {
-    const location = useLocation()
-    return(
-        <div
-       className="w-full p-4 bg-black/70 backdrop-blur-2xl text-white" 
-        >
-            <ul className="flex items-center justify-center gap-[10px]">
-            <Link to={'/'}>
-                <li
-                className={`${location.pathname === '/' ? 'text-green-600 font-bold text-[40px]' : 'text-white text-[20px] font-light'}`} 
-                >
-                    Home
-                </li>
-            </Link>
-
-            <Link to={'/about'}>
-                <li
-                className={`${location.pathname === '/about' ? 'text-green-600 font-bold text-[40px]' : 'text-white text-[20px] font-light'} `}
-                >
-                    About
-                </li>
-            </Link>
-
-            <Link to={'/users'}>
-                <li
-                className={`${location.pathname === '/users' ? 'text-green-600 font-bold text-[40px]' : 'text-white text-[20px] font-light'} `}
-                >
-                    View users
-                </li>
-            </Link>
-
-                <Link to={'/contact'}>
-                <li>
-                    Contact
-                </li>
-                </Link>
-
-                <Link to={'/signup'}>
-                <li
-                className={`${location.pathname === '/signup' ? 'text-green-600 font-bold text-[40px]' : 'text-white text-[20px] font-light'} `}
-                >
-                    Signup
-                </li>
-            </Link>
-
-            <Link to={'/login'}>
-                <li
-                className={`${location.pathname === '/login' ? 'text-green-600 font-bold text-[40px]' : 'text-white text-[20px] font-light'} `}
-                >
-                Login
-                </li>
-            </Link>
-            </ul>
-        </div>
-    )
+      {/* Logo */}
+      <NavLink
+        to="/home"
+        className="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white shadow-lg"
+      >
+        TX
+      </NavLink>
+      
+      {/* NAV LINKS */}
+      <nav className="flex text-lg gap-7 font-medium">
+        {[
+          ["Home", "/home"],
+          ["About", "/about"],
+          ["Projects", "/projects"],
+          ["Sign up", "/signup"],
+          ["Contact us", "/contact"],
+          ["Login", "/login"],
+        ].map(([label, path]) => (
+          <NavLink
+            key={path}
+            to={path}
+            className={({ isActive }) =>
+              `transition-colors ${
+                isActive ? "text-blue-500" : "text-white"
+              }`
+            }
+          >
+            {label}
+          </NavLink>
+        ))}
+      </nav>
+    </header>
+  );
 };
+
+export default Navbar;

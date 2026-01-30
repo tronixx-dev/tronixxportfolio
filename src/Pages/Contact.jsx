@@ -1,113 +1,142 @@
-
-import { useState } from "react"
-import { toast, ToastContainer } from "react-toastify"
+import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phoneNumber: "",
+    message: "",
+  });
 
-    const [formData, setFormData] = useState({
-        fullName: "",
-        email: "",
-        phoneNumber: "",
-        message: ""
-    })
+  const [loading, setLoading] = useState(false);
 
-    const [loading, setLoading] = useState(false)
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-    const handleChange = (event) => {
-        const { name, value } = event.target
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value
-        }))
-    }
+    try {
+      setLoading(true);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-
-        try {
-            setLoading(true)
-            const response = await fetch('https://my-project-xkha.vercel.app/post-contact', {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            })
-    
-            console.log(response)
-    
-            if(!response.ok) throw new Error("API Failed")
-    
-                if(response.status === 201) {
-                    toast.success("Form submited successfully.")
-                }
-            
-        } catch (err) {
-            console.error(err)
-        }finally {
-            setLoading(false)
+      const response = await fetch(
+        "https://my-project-xkha.vercel.app/post-contact",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
         }
+      );
+
+      if (!response.ok) throw new Error("Submission failed");
+
+      if (response.status === 201) {
+        toast.success("Message sent successfully!");
+        setFormData({
+          fullName: "",
+          email: "",
+          phoneNumber: "",
+          message: "",
+        });
+      }
+    } catch (err) {
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
+  };
 
+  return (
+    <section className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center px-6">
+      <ToastContainer position="top-right" autoClose={3000} />
 
-    return(
-        <div
-        className="w-full min-h-screen flex flex-col items-center justify-center"
-        >
-        <ToastContainer/>
-            <h1>
-                Contact form - {formData.fullName}
-            </h1>
+      <div className="w-full max-w-xl bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-white shadow-xl">
 
-            <form
-            className="flex flex-col w-full gap-[10px] items-center justify-center mt-[5rem]"
-            >
-                <div
-                className="flex flex-col gap-[1.5rem] mb-[1.5rem]"
-                >
-                    <label>
-                        Full Name
-                    </label>
-                    <input className="border-[1px] border-black" type="text" placeholder="Enter your full-name" name="fullName" value={formData.fullName} onChange={handleChange}/>
-                </div>
-
-                <div
-                className="flex flex-col gap-[1.5rem] mb-[1.5rem]"
-                >
-                    <label>
-                        Email
-                    </label>
-                    <input className="border-[1px] border-black" placeholder="Enter your email" type="email" name="email" value={formData.email} onChange={handleChange}/>
-                </div>
-
-                <div
-                className="flex flex-col gap-[1.5rem] mb-[1.5rem]"
-                >
-                    <label>
-                        Phone number
-                    </label>
-                    <input className="border-[1px] border-black" type="tel" placeholder="Enter your phone-number" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange}/>
-                </div>
-
-                <div
-                className="flex flex-col gap-[1.5rem] mb-[1.5rem]"
-                >
-                    <label>
-                        Message
-                    </label>
-                    <textarea className="border-[1px] border-black" rows={10} cols={40}
-                    value={formData.message} name="message" onChange={handleChange}
-                    ></textarea>
-                </div>
-
-                <button
-                className="p-5 bg-green-600 text-white rounded-[20px] cursor-pointer"
-                onClick={handleSubmit}
-                >
-                    {loading ? "Loading....." : "Submit"}
-                </button>
-            </form>
+        {/* Header */}
+        <div className="mb-10 text-center">
+          <h1 className="text-4xl font-bold mb-3">
+            Get in <span className="text-blue-500">Touch</span>
+          </h1>
+          <p className="text-gray-400">
+            Have a project or idea? Let’s talk.
+          </p>
         </div>
-    )
-};
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-5">
+
+          <div>
+            <label className="block text-sm mb-1 text-gray-300">
+              Full Name
+            </label>
+            <input
+              type="text"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleChange}
+              placeholder="John Doe"
+              required
+              className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 outline-none focus:border-blue-500 transition"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1 text-gray-300">
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="john@email.com"
+              required
+              className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 outline-none focus:border-blue-500 transition"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1 text-gray-300">
+              Phone Number
+            </label>
+            <input
+              type="tel"
+              name="phoneNumber"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              placeholder="+234 000 000 0000"
+              className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 outline-none focus:border-blue-500 transition"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1 text-gray-300">
+              Message
+            </label>
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              rows={5}
+              placeholder="Tell me about your project..."
+              required
+              className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 outline-none focus:border-blue-500 transition resize-none"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-500 transition font-semibold disabled:opacity-60"
+          >
+            {loading ? "Sending..." : "Send Message"}
+          </button>
+        </form>
+      </div>
+    </section>
+  );
+}
