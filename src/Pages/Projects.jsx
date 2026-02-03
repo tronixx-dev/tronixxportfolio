@@ -30,7 +30,7 @@ export default function Projects() {
     <section className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white px-6 py-24">
       <div className="max-w-6xl mx-auto">
 
-        {/* Header */}
+   
         <div className="mb-20">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Selected <span className="text-blue-500">Projects</span>
@@ -41,14 +41,13 @@ export default function Projects() {
           </p>
         </div>
 
-        {/* Project List */}
         <div className="space-y-16">
           {projects.map((project, index) => (
             <div
               key={index}
               className="group grid md:grid-cols-2 gap-10 items-center border-b border-white/10 pb-16"
             >
-              {/* Left: Info */}
+            
               <div>
                 <h2 className="text-3xl font-semibold mb-4">
                   {project.title}

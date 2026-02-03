@@ -12,7 +12,7 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        {/* Redirect root to home */}
+       
         <Route path="/" element={<Navigate to="/home" replace />} />
 
         <Route path="/home" element={<Home />} />

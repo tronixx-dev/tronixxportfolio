@@ -52,7 +52,7 @@ export default function Signup() {
     <section className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center px-6">
       <div className="w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-white shadow-xl">
 
-        {/* Header */}
+       
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold mb-2">
             Create an <span className="text-blue-500">Account</span>
@@ -62,7 +62,6 @@ export default function Signup() {
           </p>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
 
           <div>
@@ -74,7 +73,7 @@ export default function Signup() {
               name="username"
               value={userData.username}
               onChange={handleChange}
-              placeholder="yourusername"
+              placeholder="your username"
               required
               className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 outline-none focus:border-blue-500 transition"
             />
@@ -89,7 +88,7 @@ export default function Signup() {
               name="email"
               value={userData.email}
               onChange={handleChange}
-              placeholder="you@email.com"
+              placeholder="example@email.com"
               required
               className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 outline-none focus:border-blue-500 transition"
             />

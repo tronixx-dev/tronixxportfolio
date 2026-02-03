@@ -56,7 +56,7 @@ export default function Contact() {
 
       <div className="w-full max-w-xl bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-white shadow-xl">
 
-        {/* Header */}
+        
         <div className="mb-10 text-center">
           <h1 className="text-4xl font-bold mb-3">
             Get in <span className="text-blue-500">Touch</span>
@@ -66,7 +66,7 @@ export default function Contact() {
           </p>
         </div>
 
-        {/* Form */}
+       
         <form onSubmit={handleSubmit} className="space-y-5">
 
           <div>
@@ -78,7 +78,7 @@ export default function Contact() {
               name="fullName"
               value={formData.fullName}
               onChange={handleChange}
-              placeholder="John Doe"
+              placeholder="enter your full name"
               required
               className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 outline-none focus:border-blue-500 transition"
             />
@@ -93,7 +93,7 @@ export default function Contact() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="john@email.com"
+              placeholder="sarmie@email.com"
               required
               className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 outline-none focus:border-blue-500 transition"
             />

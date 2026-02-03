@@ -5,7 +5,7 @@ const Navbar = () => {
     <header className="fixed top-0 left-0 w-full h-16 px-6 md:px-12 flex items-center justify-between 
       bg-black/40 backdrop-blur-md border-b border-white/10 z-50">
 
-      {/* Logo */}
+      
       <NavLink
         to="/home"
         className="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white shadow-lg"
@@ -13,7 +13,7 @@ const Navbar = () => {
         TX
       </NavLink>
       
-      {/* NAV LINKS */}
+     
       <nav className="flex text-lg gap-7 font-medium">
         {[
           ["Home", "/home"],

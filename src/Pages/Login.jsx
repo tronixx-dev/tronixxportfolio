@@ -56,7 +56,7 @@ export default function Login() {
 
       <div className="w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-white shadow-xl">
 
-        {/* Header */}
+      
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold mb-2">
             Welcome <span className="text-blue-500">Back</span>
@@ -66,7 +66,7 @@ export default function Login() {
           </p>
         </div>
 
-        {/* Form */}
+        
         <form onSubmit={handleSubmit} className="space-y-5">
 
           <div>
@@ -108,9 +108,9 @@ export default function Login() {
           </button>
         </form>
 
-        {/* Footer */}
+        
         <p className="text-center text-sm text-gray-400 mt-6">
-          Don’t have an account?{" "}
+          Don't have an account?{" "}
           <a href="/signup" className="text-blue-400 hover:underline">
             Sign up
           </a>
