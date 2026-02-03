@@ -29,18 +29,30 @@ export default function Signup() {
         "https://my-project-xkha.vercel.app/post-user",
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify(userData),
         }
       );
 
       const data = await response.json();
 
-      if (!response.ok)
-        throw new Error(data.message || data.error || "Signup failed");
+      // ❌ Backend error
+      if (!response.ok) {
+        throw new Error(data.message || "Signup failed");
+      }
 
-      toast.success("Signed up successfully!");
+      // ✅ Save token (VERY IMPORTANT)
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+      }
+
+      toast.success("Account created successfully!");
+
+      // ✅ Redirect after success
       navigate("/home");
+
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -52,7 +64,6 @@ export default function Signup() {
     <section className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center px-6">
       <div className="w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-white shadow-xl">
 
-       
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold mb-2">
             Create an <span className="text-blue-500">Account</span>
@@ -73,7 +84,6 @@ export default function Signup() {
               name="username"
               value={userData.username}
               onChange={handleChange}
-              placeholder="your username"
               required
               className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 outline-none focus:border-blue-500 transition"
             />
@@ -88,7 +98,6 @@ export default function Signup() {
               name="email"
               value={userData.email}
               onChange={handleChange}
-              placeholder="example@email.com"
               required
               className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 outline-none focus:border-blue-500 transition"
             />
@@ -103,7 +112,6 @@ export default function Signup() {
               name="password"
               value={userData.password}
               onChange={handleChange}
-              placeholder="••••••••"
               required
               className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 outline-none focus:border-blue-500 transition"
             />
@@ -118,7 +126,6 @@ export default function Signup() {
               value={userData.bio}
               onChange={handleChange}
               rows={4}
-              placeholder="Tell us a bit about yourself..."
               className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 outline-none focus:border-blue-500 transition resize-none"
             />
           </div>
