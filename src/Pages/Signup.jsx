@@ -38,19 +38,19 @@ export default function Signup() {
 
       const data = await response.json();
 
-      // ❌ Backend error
+     
       if (!response.ok) {
         throw new Error(data.message || "Signup failed");
       }
 
-      // ✅ Save token (VERY IMPORTANT)
+     
       if (data.token) {
         localStorage.setItem("token", data.token);
       }
 
       toast.success("Account created successfully!");
 
-      // ✅ Redirect after success
+      
       navigate("/home");
 
     } catch (error) {
