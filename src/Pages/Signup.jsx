@@ -26,7 +26,7 @@ export default function Signup() {
 
     try {
       const response = await fetch(
-        "https://my-project-xkha.vercel.app/post-user",
+        "https://my-project-rfop.vercel.app/post-user",
         {
           method: "POST",
           headers: {
